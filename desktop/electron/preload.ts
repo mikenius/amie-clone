@@ -1,0 +1,12 @@
+import { contextBridge, ipcRenderer } from 'electron'
+
+// Expose protected methods that allow the renderer process to use
+// the ipcRenderer without exposing the entire object
+contextBridge.exposeInMainWorld('electronAPI', {
+  getVersion: () => ipcRenderer.invoke('app:version'),
+  // --- Tasks DB ---
+  getTasks: () => ipcRenderer.invoke('db:getTasks'),
+  createTask: (task: any) => ipcRenderer.invoke('db:createTask', task),
+  updateTask: (task: any) => ipcRenderer.invoke('db:updateTask', task),
+  deleteTask: (id: string) => ipcRenderer.invoke('db:deleteTask', id),
+})
