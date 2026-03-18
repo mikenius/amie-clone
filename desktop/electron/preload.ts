@@ -16,4 +16,6 @@ contextBridge.exposeInMainWorld('electronAPI', {
   // --- Calendar ---
   getEvents: () => ipcRenderer.invoke('db:getEvents'),
   syncCalendar: () => ipcRenderer.invoke('calendar:syncEvents'),
+  createEventFromTask: (taskId: string, start: string, end: string) => 
+    ipcRenderer.invoke('calendar:createFromTask', taskId, start, end),
 })

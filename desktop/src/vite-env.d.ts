@@ -15,5 +15,6 @@ interface Window {
     // Calendar
     getEvents: () => Promise<any[]>
     syncCalendar: () => Promise<boolean>
+    createEventFromTask: (taskId: string, start: string, end: string) => Promise<string>
   }
 }

@@ -141,6 +141,30 @@ export const dbAPI = {
 
     transaction(events)
     return true
+  },
+
+  createEventFromTask: (taskId: string, startTime: string, endTime: string) => {
+    const task = db.prepare('SELECT * FROM tasks WHERE id = ?').get(taskId) as any
+    if (!task) return null
+
+    const eventId = `local-${Date.now()}`
+    
+    const createEvent = db.prepare(`
+      INSERT INTO events (id, title, start_time, end_time, source, synced_at)
+      VALUES (?, ?, ?, ?, ?, ?)
+    `)
+    
+    const updateTask = db.prepare(`
+      UPDATE tasks SET calendar_event_id = ? WHERE id = ?
+    `)
+
+    const transaction = db.transaction(() => {
+      createEvent.run(eventId, task.title, startTime, endTime, 'local', new Date().toISOString())
+      updateTask.run(eventId, taskId)
+    })
+
+    transaction()
+    return eventId
   }
 }
 

@@ -1,9 +1,25 @@
 import React from 'react'
 import { useCalendarStore } from '../store/useCalendarStore'
+import { useDroppable } from '@dnd-kit/core'
 import { format, addDays, isSameDay, startOfDay, endOfDay } from 'date-fns'
 import { ja } from 'date-fns/locale'
 import { useEventStore } from '../store/useEventStore'
 import { CalendarEventBlock } from './CalendarEventBlock'
+
+const TimeSlot: React.FC<{ date: Date; hour: number }> = ({ date, hour }) => {
+  const id = `${format(date, 'yyyy-MM-dd')}-${hour}`
+  const { setNodeRef, isOver } = useDroppable({
+    id: id,
+    data: { date, hour }
+  })
+
+  return (
+    <div 
+      ref={setNodeRef} 
+      className={`calendar-grid-cell ${isOver ? 'drop-target' : ''}`}
+    />
+  )
+}
 
 export const CalendarGrid: React.FC = () => {
   const { baseDate } = useCalendarStore()
@@ -54,9 +70,13 @@ export const CalendarGrid: React.FC = () => {
 
             return (
               <div key={day.toISOString()} className="day-column">
-                {hours.map((hour) => (
-                  <div key={hour} className="hour-slot" />
-                ))}
+                <div className="slots-layer">
+                  {hours.map((hour) => (
+                    <div key={hour} className="hour-slot">
+                      <TimeSlot date={day} hour={hour} />
+                    </div>
+                  ))}
+                </div>
                 {/* Event Blocks Layer */}
                 <div className="events-layer">
                   {dayEvents.map(event => (

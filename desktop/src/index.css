@@ -228,7 +228,15 @@ body {
   display: flex;
   flex-direction: column;
   border-left: 1px solid var(--border-color);
-  position: relative; /* For absolute positioned events */
+  position: relative;
+}
+
+.slots-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .events-layer {
@@ -274,7 +282,17 @@ body {
 
 .hour-slot {
   height: 60px;
-  border-bottom: 1px dotted var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.calendar-grid-cell {
+  width: 100%;
+  height: 100%;
+}
+
+.calendar-grid-cell.drop-target {
+  background-color: rgba(247, 85, 49, 0.1); /* accent color with alpha */
+  box-shadow: inset 0 0 0 2px var(--accent-color);
 }
 
 .sidebar-header, .main-header {

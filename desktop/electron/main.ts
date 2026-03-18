@@ -108,3 +108,7 @@ ipcMain.handle('calendar:syncEvents', async () => {
     return false
   }
 })
+
+ipcMain.handle('calendar:createFromTask', (_, taskId, startTime, endTime) => {
+  return dbAPI.createEventFromTask(taskId, startTime, endTime)
+})
