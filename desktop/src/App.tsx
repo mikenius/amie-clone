@@ -1,15 +1,12 @@
 import { useEffect, useState } from 'react'
 import { TaskList } from './components/TaskList'
+import { Calendar } from './components/Calendar'
 
 function App() {
-  const [version, setVersion] = useState<string>('')
-
   useEffect(() => {
     // electronAPIが存在する場合（Electron環境）のみ実行
     if (window.electronAPI) {
-      window.electronAPI.getVersion().then(setVersion)
-    } else {
-      setVersion('Web Dev Mode')
+      window.electronAPI.getVersion().then((v) => console.log('App Version:', v))
     }
   }, [])
 
@@ -26,14 +23,7 @@ function App() {
 
         {/* Right Pane: Calendar (P1-04) */}
         <div className="main-content">
-          <div className="main-header">
-            Calendar
-          </div>
-          <div className="scroll-area">
-            <p className="placeholder-text">
-              Weekly calendar will be implemented here (P1-04)
-            </p>
-          </div>
+          <Calendar />
         </div>
       </div>
     </>
