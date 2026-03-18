@@ -9,4 +9,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
   createTask: (task: any) => ipcRenderer.invoke('db:createTask', task),
   updateTask: (task: any) => ipcRenderer.invoke('db:updateTask', task),
   deleteTask: (id: string) => ipcRenderer.invoke('db:deleteTask', id),
+  // --- Auth ---
+  login: () => ipcRenderer.invoke('auth:login'),
+  logout: () => ipcRenderer.invoke('auth:logout'),
+  isLoggedIn: () => ipcRenderer.invoke('auth:isLoggedIn'),
 })

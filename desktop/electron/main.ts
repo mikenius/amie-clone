@@ -1,6 +1,7 @@
 import { app, BrowserWindow, ipcMain, nativeTheme } from 'electron'
 import { join } from 'path'
 import { dbAPI } from './db'
+import { authAPI } from './auth'
 
 let mainWindow: BrowserWindow | null = null
 
@@ -74,4 +75,17 @@ ipcMain.handle('db:updateTask', (_, task) => {
 
 ipcMain.handle('db:deleteTask', (_, id) => {
   return dbAPI.deleteTask(id)
+})
+
+// Auth handlers
+ipcMain.handle('auth:login', () => {
+  return authAPI.login()
+})
+
+ipcMain.handle('auth:logout', () => {
+  return authAPI.logout()
+})
+
+ipcMain.handle('auth:isLoggedIn', () => {
+  return authAPI.isLoggedIn()
 })

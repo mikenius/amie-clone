@@ -306,6 +306,75 @@ body {
 .task-list-footer {
   padding: 15px 20px;
   border-top: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Auth Status */
+.auth-status-container {
+  font-size: 0.85rem;
+}
+
+.auth-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s, border-color 0.2s;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-color-light);
+  color: var(--text-color);
+}
+
+.auth-btn.google-login:hover {
+  background-color: #f1f1f1;
+  color: #333;
+}
+
+.auth-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 0;
+}
+
+.auth-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.75rem;
+}
+
+.auth-icon.google {
+  background-color: #4285F4;
+  color: white;
+}
+
+.auth-text {
+  flex: 1;
+  color: var(--text-color-muted);
+}
+
+.auth-btn.logout {
+  width: auto;
+  padding: 2px 8px;
+  font-size: 0.7rem;
+  background: none;
+  border-color: transparent;
+}
+
+.auth-btn.logout:hover {
+  color: #ff4d4d;
 }
 
 /* Task Item */

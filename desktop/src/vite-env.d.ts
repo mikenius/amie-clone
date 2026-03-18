@@ -8,5 +8,9 @@ interface Window {
     createTask: (task: any) => Promise<any>
     updateTask: (task: any) => Promise<boolean>
     deleteTask: (id: string) => Promise<boolean>
+    // Auth
+    login: () => Promise<boolean>
+    logout: () => Promise<boolean>
+    isLoggedIn: () => Promise<boolean>
   }
 }

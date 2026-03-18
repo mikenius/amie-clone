@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useTaskStore } from '../store/useTaskStore'
 import { TaskItem } from './TaskItem'
 import { AddTask } from './AddTask'
+import { AuthStatus } from './AuthStatus'
 
 export const TaskList: React.FC = () => {
   const { tasks, isLoading, fetchTasks } = useTaskStore()
@@ -27,6 +28,7 @@ export const TaskList: React.FC = () => {
         )}
       </div>
       <div className="task-list-footer">
+        <AuthStatus />
         <AddTask />
       </div>
     </div>
