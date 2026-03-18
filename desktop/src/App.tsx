@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { DndContext, DragOverlay, DragEndEvent, useSensor, useSensors, PointerSensor } from '@dnd-kit/core'
+import { DndContext, DragEndEvent, useSensor, useSensors, PointerSensor } from '@dnd-kit/core'
 import { TaskList } from './components/TaskList'
 import { Calendar } from './components/Calendar'
 

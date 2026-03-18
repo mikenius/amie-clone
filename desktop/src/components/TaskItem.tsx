@@ -1,4 +1,10 @@
+import React from 'react'
+import { Task, useTaskStore } from '../store/useTaskStore'
 import { useDraggable } from '@dnd-kit/core'
+
+interface TaskItemProps {
+  task: Task
+}
 
 export const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
   const toggleTask = useTaskStore((state) => state.toggleTask)
