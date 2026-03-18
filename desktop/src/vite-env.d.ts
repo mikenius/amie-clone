@@ -12,5 +12,8 @@ interface Window {
     login: () => Promise<boolean>
     logout: () => Promise<boolean>
     isLoggedIn: () => Promise<boolean>
+    // Calendar
+    getEvents: () => Promise<any[]>
+    syncCalendar: () => Promise<boolean>
   }
 }

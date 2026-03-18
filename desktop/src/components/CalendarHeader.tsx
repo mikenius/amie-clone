@@ -1,10 +1,12 @@
 import React from 'react'
 import { useCalendarStore } from '../store/useCalendarStore'
+import { useEventStore } from '../store/useEventStore'
 import { format } from 'date-fns'
 import { ja } from 'date-fns/locale'
 
 export const CalendarHeader: React.FC = () => {
   const { baseDate, prevWeek, nextWeek, today } = useCalendarStore()
+  const { syncEvents, isSyncing } = useEventStore()
 
   return (
     <div className="calendar-header">
@@ -12,6 +14,13 @@ export const CalendarHeader: React.FC = () => {
         <button className="nav-btn no-drag" onClick={prevWeek}>&lt;</button>
         <button className="nav-btn today-btn no-drag" onClick={today}>Today</button>
         <button className="nav-btn no-drag" onClick={nextWeek}>&gt;</button>
+        <button 
+          className={`nav-btn sync-btn no-drag ${isSyncing ? 'syncing' : ''}`} 
+          onClick={syncEvents}
+          title="Sync with Google Calendar"
+        >
+          {isSyncing ? '⌛' : '🔄'}
+        </button>
       </div>
       <div className="calendar-title">
         {format(baseDate, 'yyyy年 M月', { locale: ja })}

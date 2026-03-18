@@ -13,4 +13,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
   login: () => ipcRenderer.invoke('auth:login'),
   logout: () => ipcRenderer.invoke('auth:logout'),
   isLoggedIn: () => ipcRenderer.invoke('auth:isLoggedIn'),
+  // --- Calendar ---
+  getEvents: () => ipcRenderer.invoke('db:getEvents'),
+  syncCalendar: () => ipcRenderer.invoke('calendar:syncEvents'),
 })

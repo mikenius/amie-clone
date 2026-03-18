@@ -6,7 +6,7 @@ import * as dotenv from 'dotenv'
 import { join } from 'path'
 import * as fs from 'fs'
 
-dotenv.config({ path: join(__dirname, '../src/.env') })
+dotenv.config({ path: join(__dirname, '../.env') })
 
 const CLIENT_ID = process.env.GOOGLE_CLIENT_ID
 const CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET

@@ -2,6 +2,7 @@ import { app, BrowserWindow, ipcMain, nativeTheme } from 'electron'
 import { join } from 'path'
 import { dbAPI } from './db'
 import { authAPI } from './auth'
+import { calendarAPI } from './calendar'
 
 let mainWindow: BrowserWindow | null = null
 
@@ -88,4 +89,22 @@ ipcMain.handle('auth:logout', () => {
 
 ipcMain.handle('auth:isLoggedIn', () => {
   return authAPI.isLoggedIn()
+})
+
+// Calendar handlers
+ipcMain.handle('db:getEvents', () => {
+  return dbAPI.getEvents()
+})
+
+ipcMain.handle('calendar:syncEvents', async () => {
+  if (!authAPI.isLoggedIn()) return false
+  
+  try {
+    const events = await calendarAPI.listEvents()
+    dbAPI.upsertEvents(events)
+    return true
+  } catch (error) {
+    console.error('Failed to sync events:', error)
+    return false
+  }
 })

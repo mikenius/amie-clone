@@ -106,6 +106,41 @@ export const dbAPI = {
   deleteTask: (id: string) => {
     const result = db.prepare('DELETE FROM tasks WHERE id = ?').run(id)
     return result.changes > 0
+  },
+
+  // --- Events ---
+  getEvents: () => {
+    return db.prepare('SELECT * FROM events ORDER BY start_time ASC').all()
+  },
+
+  upsertEvents: (events: any[]) => {
+    const insert = db.prepare(`
+      INSERT OR REPLACE INTO events (
+        id, calendar_id, title, start_time, end_time, description, location, is_all_day, source, synced_at
+      ) VALUES (
+        @id, @calendar_id, @title, @start_time, @end_time, @description, @location, @is_all_day, @source, @synced_at
+      )
+    `)
+
+    const transaction = db.transaction((evs) => {
+      for (const ev of evs) {
+        insert.run({
+          id: ev.id,
+          calendar_id: ev.calendar_id || 'primary',
+          title: ev.summary || ev.title || '(No Title)',
+          start_time: ev.start?.dateTime || ev.start?.date || ev.start_time,
+          end_time: ev.end?.dateTime || ev.end?.date || ev.end_time,
+          description: ev.description || null,
+          location: ev.location || null,
+          is_all_day: (ev.start?.date ? 1 : 0) || ev.is_all_day || 0,
+          source: ev.source || 'google',
+          synced_at: new Date().toISOString(),
+        })
+      }
+    })
+
+    transaction(events)
+    return true
   }
 }
 
