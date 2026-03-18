@@ -83,6 +83,108 @@ body {
   font-size: 1.1rem;
 }
 
+/* Task List Specific */
+.task-list-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.task-list-header {
+  height: 60px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.task-list-header h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.task-list-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 0;
+}
+
+.task-list-footer {
+  padding: 15px 20px;
+  border-top: 1px solid var(--border-color);
+}
+
+/* Task Item */
+.task-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+
+.task-item:hover {
+  background-color: var(--bg-color-light);
+}
+
+.task-item.completed .task-title {
+  text-decoration: line-through;
+  color: var(--text-color-muted);
+}
+
+.task-checkbox {
+  width: 18px;
+  height: 18px;
+  margin-right: 12px;
+  cursor: pointer;
+  accent-color: var(--accent-color);
+}
+
+.task-title {
+  flex: 1;
+  font-size: 0.95rem;
+}
+
+.task-delete-btn {
+  background: none;
+  border: none;
+  color: var(--text-color-muted);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0 5px;
+  opacity: 0;
+  transition: opacity 0.2s, color 0.2s;
+}
+
+.task-item:hover .task-delete-btn {
+  opacity: 1;
+}
+
+.task-delete-btn:hover {
+  color: #ff4d4d;
+}
+
+/* Add Task */
+.add-task-form {
+  width: 100%;
+}
+
+.add-task-input {
+  width: 100%;
+  background-color: var(--bg-color-light);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: var(--text-color);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.add-task-input:focus {
+  border-color: var(--accent-color);
+}
+
 .scroll-area {
   flex: 1;
   overflow-y: auto;
