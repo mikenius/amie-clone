@@ -1,0 +1,34 @@
+name: Feature Implementation
+description: 機能実装タスク
+title: "[IMPL] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: 概要
+      description: 実装する機能の説明
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: 完了条件
+      description: この Issue が完了したと判断できる条件
+    validations:
+      required: true
+  - type: dropdown
+    id: phase
+    attributes:
+      label: Phase
+      options:
+        - Phase 1 (MVP)
+        - Phase 2 (Gmail/Cal Write)
+        - Phase 3 (integrations)
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: 備考
+      description: 技術的な注意点・参考リンクなど
